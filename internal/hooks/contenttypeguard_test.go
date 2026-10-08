@@ -98,6 +98,9 @@ func TestContentTypeGuardHook_AfterSuccess_BodyStillReadable(t *testing.T) {
 	}
 
 	result, err := hook.AfterSuccess(hooks.AfterSuccessContext{}, res)
+	if err != nil {
+		t.Fatalf("error running hook: %v", err)
+	}
 
 	// Act
 	body, err := utils.ConsumeRawBody(result)
@@ -158,6 +161,9 @@ func TestContentTypeGuardHook_AfterError_BodyStillReadable(t *testing.T) {
 	}
 
 	result, err := hook.AfterError(hooks.AfterErrorContext{}, res, fmt.Errorf("some error"))
+	if err != nil {
+		t.Fatalf("error running hook: %v", err)
+	}
 
 	// Act
 	body, err := utils.ConsumeRawBody(result)
